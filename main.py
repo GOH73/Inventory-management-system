@@ -3,6 +3,7 @@ from tkinter import messagebox
 import list
 from tkinter.ttk import *
 
+
 class Application(Frame):
     def __init__(self, master=None):
         super().__init__(master)  # super()代表父类的定义 不是父类对象
@@ -11,7 +12,7 @@ class Application(Frame):
         self.createWidget()
 
     def createWidget(self):
-        self.label1 = Label(self, text="药品库存管理信息系统")
+        self.label1 = Label(self, text="Appen重庆台式机库存管理系统")
         self.label1.grid(row=0, column=1)
         # 创建用户名输入框
         self.label2 = Label(self, text="用户名")
@@ -20,7 +21,6 @@ class Application(Frame):
         v1 = StringVar()
         self.entry1 = Entry(self, textvariable=v1)
         self.entry1.grid(row=1, column=1)
-
 
         # 创建密码输入框
         self.label3 = Label(self, text="密码")
@@ -31,7 +31,7 @@ class Application(Frame):
         self.entry2.grid(row=2, column=1)
 
         #  创建登录按钮
-        self.btn1 = Button(self,text="登录", command=self.login)
+        self.btn1 = Button(self, text="登录", command=self.login)
         self.btn1.grid(row=5, column=1)
 
         # 创建一个退出按钮
@@ -42,7 +42,7 @@ class Application(Frame):
         username = self.entry1.get()
         password = self.entry2.get()
 
-        if username == "" and password == "":
+        if username == "appen" and password == "test":
             create_frame1()
 
         else:
@@ -57,43 +57,49 @@ def create_frame1(p=None):
     else:
         root.destroy()
     root1.geometry("1000x700+250+50")
-    root1.title("药品库存管理信息系统")
-    btnText = ("库存基本数据管理","入库管理","出库管理","盘点管理")
+    root1.title("Appen重庆台式机库存管理系统")
+    btnText = ("总数统计", "数据谷", "两江", "盘点管理")
     funclist = (frame1_button1, frame1_button2, frame1_button3, frame1_button4)
     i = 0
     for text in btnText:
-        Button(root1, text=text, command=funclist[i]).pack(side="left", padx="10",anchor="n")
+        Button(root1, text=text, command=funclist[i]).pack(side="left", padx="10", anchor="n")
         i = i + 1
-    Button(root1, text="退回登录界面", command=return_to_main_frame).pack(side="left", padx="10",anchor="n")
+    Button(root1, text="退回登录界面", command=return_to_main_frame).pack(side="left", padx="10", anchor="n")
     root1.mainloop()
+
 
 def frame1_button1():
     root1.destroy()
-    columns = ("id","仓库大小", "货架数量", "货架规格", "推车数量", "推车规格", "库工人数")
+    columns = ("id", "仓库大小", "货架数量", "货架规格", "推车数量", "推车规格", "库工人数")
     name = "库存基本数据"
     list.main(columns, name)
 
+
 def frame1_button2():
     root1.destroy()
-    columns = ("id","产品代码", "名称", "入库数量", "单位", "日期", "操作者", "存货货位")
+    columns = ("id", "产品代码", "名称", "入库数量", "单位", "日期", "操作者", "存货货位")
     name = "入库管理"
     list.main(columns, name)
 
+
 def frame1_button3():
     root1.destroy()
-    columns = ("id","产品代码", "名称", "出库数量", "单位", "日期", "操作者", "出货货位")
+    columns = ("id", "产品代码", "名称", "出库数量", "单位", "日期", "操作者", "出货货位")
     name = "出库管理"
     list.main(columns, name)
 
+
 def frame1_button4():
     root1.destroy()
-    columns = ("id","产品代码", "名称", "出库数量", "单位 ", "入库数量", "单位", "结余", "空余货位", "日期", "操作者")
+    columns = ("id", "产品代码", "名称", "出库数量", "单位 ", "入库数量", "单位", "结余", "空余货位", "日期", "操作者")
     name = "盘点管理"
     list.main(columns, name)
+
 
 def return_to_main_frame():
     root1.destroy()
     main_frame()
+
 
 def main_frame():
     global root
@@ -109,6 +115,3 @@ def main_frame():
 
 if __name__ == "__main__":
     main_frame()
-
-
-

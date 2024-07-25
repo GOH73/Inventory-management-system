@@ -9,10 +9,11 @@ from tkinter import simpledialog
 import main as main_module
 import database
 
+
 def main(columns, names):
-    global root,treeview,newb,content,db,return_to_last,deleteb,searchb
-    db = database.DataBase(names) # 初始化数据库，连接数据库并得到对应table的数据
-    content = db.Search() # 内容
+    global root, treeview, newb, content, db, return_to_last, deleteb, searchb
+    db = database.DataBase(names)  # 初始化数据库，连接数据库并得到对应table的数据
+    content = db.Search()  # 内容
 
     root = Tk()  # 初始框的声明
     treeview = ttk.Treeview(root, height=18, show="headings", columns=columns)  # 表格
@@ -71,10 +72,11 @@ def treeview_sort_column(tv, col, reverse):  # Treeview、列名、排列方式
         tv.move(k, '', index)
     tv.heading(col, command=lambda: treeview_sort_column(tv, col, not reverse))  # 重写标题，使之成为再点倒序的标题
 
+
 def search():
     sql = simpledialog.askstring("查找", "请输入SQL语句")
 
-    content =  db.Search(sql)
+    content = db.Search(sql)
     for ii in treeview.get_children():
         treeview.delete(ii)
 
@@ -85,8 +87,8 @@ def search():
     deleteb.place(x=160, y=(len(content) - 1) * 20 + 45)
     searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
 
-
     treeview.update()
+
 
 def delete():
     item = treeview.selection()
@@ -107,9 +109,10 @@ def delete():
     searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
 
     for i in range(len(content)):
-        treeview.insert('', i,iid="I00{0}".format(i+1) , values=content[i])
+        treeview.insert('', i, iid="I00{0}".format(i + 1), values=content[i])
 
     treeview.update()
+
 
 def set_cell_value(event):  # 双击进入编辑状态
     for item in treeview.selection():
@@ -129,13 +132,14 @@ def set_cell_value(event):  # 双击进入编辑状态
         treeview.set(item, column=column, value=entryedit.get(0.0, "end"))
         # 修改后插入数据库
         # print(str(id),str(field),entryedit.get(0.0, "end"))
-        db.Change(id,field,entryedit.get(0.0, "end").strip())
+        db.Change(id, field, entryedit.get(0.0, "end").strip())
 
         entryedit.destroy()
         okb.destroy()
 
     okb = ttk.Button(root, text='OK', width=4, command=saveedit)
     okb.place(x=90 + (cn - 1) * 100, y=2 + rn * 20)
+
 
 # 新建条目，我准备插入None，然后在修改条目那里再做文章
 def newrow(names):
@@ -158,17 +162,18 @@ def newrow(names):
         treeview.update()
 
     if names == "库存基本数据":
-        temp = (0,0, 0, 0, 0, 0, 0)
+        temp = (0, 0, 0, 0, 0, 0, 0)
         updata_list(temp)
     elif names == "入库管理":
-        temp = (0,0, 0,0, 0, 0, 0, 0)
+        temp = (0, 0, 0, 0, 0, 0, 0, 0)
         updata_list(temp)
     elif names == "出库管理":
-        temp = (0,0, 0, 0, 0, 0, 0, 0)
+        temp = (0, 0, 0, 0, 0, 0, 0, 0)
         updata_list(temp)
     elif names == "盘点管理":
-        temp = (0,0, 0,0, 0, 0, 0, 0, 0, 0, 0)
+        temp = (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         updata_list(temp)
+
 
 if __name__ == '__main__':
     pass
@@ -202,6 +207,3 @@ tree.bind('<ButtonRelease-1>', treeviewClick)
 控件尺寸变Configure
 ------------------------------
 '''
-
-
-

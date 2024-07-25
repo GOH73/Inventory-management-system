@@ -8,9 +8,10 @@
 import pymysql
 import datetime
 
+
 class DataBase(object):
     def __init__(self, name):
-        self.db = pymysql.connect("localhost", "root", "root", "药品库存管理系统")
+        self.db = pymysql.connect(host="192.168.1.12", user="root", password="123", database="药品库存管理系统")
         self.cursor = self.db.cursor()
         self.name = name
         # 获得table的字段名，在add函数中需要用到
@@ -25,7 +26,7 @@ class DataBase(object):
 
     # 根据传入的数据，新建一条条目
     def Add(self, entry):
-        sql = "INSERT INTO {0} ({1}) VALUES {2}".format(self.name,",".join(self.columns), entry)
+        sql = "INSERT INTO {0} ({1}) VALUES {2}".format(self.name, ",".join(self.columns), entry)
         self.cursor.execute(sql)
         self.db.commit()
 
@@ -65,7 +66,7 @@ if __name__ == '__main__':
     test = DataBase("盘点管理")
     results = test.Search()
     print(test.columns)
-    test.Add((0,"待赋值", "待赋值",0, "待赋值", 0, "待赋值", 0, "待赋值", "待赋值", "待赋值"))
+    test.Add((0, "待赋值", "待赋值", 0, "待赋值", 0, "待赋值", 0, "待赋值", "待赋值", "待赋值"))
 
 """
 create database 药品库存管理系统;
