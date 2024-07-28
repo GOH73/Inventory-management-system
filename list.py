@@ -10,11 +10,12 @@ import main as main_module
 import database
 
 titles = {
-    "总数统计": 'PC',
+    "总数统计": 'PC_Statistics',
     '数据谷': 'Location',
     '出库管理': 'Employee',
     '盘点管理': 'Allocation'
 }
+
 
 
 def main(columns, names):

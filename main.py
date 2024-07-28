@@ -1,4 +1,6 @@
-import getpass
+# import getpass
+
+import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 import list
@@ -108,6 +110,13 @@ def main_frame():
     # 通过geometry方法确定窗口在屏幕中的位置以及窗口的大小
     root.geometry("500x200+500+100")
     root.title("Appen（重庆）台式机库存管理系统")
+
+    from PIL import Image, ImageTk
+    image = Image.open("bg/7.png")
+    background_image = ImageTk.PhotoImage(image)
+
+    background_label = tk.Label(root, image=background_image)
+    background_label.place(relwidth=1, relheight=1)
     app = Application(master=root)
     # 进入事件主循环 等待响应
     root.mainloop()

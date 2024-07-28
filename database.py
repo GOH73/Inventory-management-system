@@ -6,7 +6,7 @@
 """
 
 import pymysql
-import datetime
+# import datetime
 
 
 class DataBase(object):
@@ -73,10 +73,18 @@ CREATE DATABASE computer_inventory;
 
 USE computer_inventory;
 
+CREATE TABLE Allocation (
+    serial_number VARCHAR(50),              -- sn码
+    employee_id VARCHAR(50),                -- 员工编号
+    PRIMARY KEY (serial_number, employee_id),
+    FOREIGN KEY (serial_number) REFERENCES PC(serial_number),
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id)
+);
+
 CREATE TABLE PC (
     serial_number VARCHAR(50) PRIMARY KEY,  -- sn码（主键）
     is_rental BOOLEAN,                      -- 是否为租赁
-    warranty VARCHAR(100),                  -- 质保
+    warranty DATE,                          -- 质保
     notes TEXT,                             -- 备注信息
     project VARCHAR(100),                   -- 项目
     project_room VARCHAR(100),              -- 项目室（外键）
@@ -93,13 +101,7 @@ CREATE TABLE Location (
     building VARCHAR(100) NOT NULL          -- 楼栋
 );
 
-CREATE TABLE Allocation (
-    serial_number VARCHAR(50),              -- sn码
-    employee_id VARCHAR(50),                -- 员工编号
-    PRIMARY KEY (serial_number, employee_id),
-    FOREIGN KEY (serial_number) REFERENCES PC(serial_number),
-    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id)
-);
+
 """
 
 """
