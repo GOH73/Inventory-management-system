@@ -9,10 +9,17 @@ from tkinter import simpledialog
 import main as main_module
 import database
 
+titles = {
+    "总数统计": 'PC',
+    '数据谷': 'Location',
+    '出库管理': 'Employee',
+    '盘点管理': 'Allocation'
+}
+
 
 def main(columns, names):
     global root, treeview, newb, content, db, return_to_last, deleteb, searchb
-    db = database.DataBase(names)  # 初始化数据库，连接数据库并得到对应table的数据
+    db = database.DataBase(titles[names])  # 初始化数据库，连接数据库并得到对应table的数据
     content = db.Search()  # 内容
 
     root = Tk()  # 初始框的声明
@@ -20,10 +27,10 @@ def main(columns, names):
     root.title(names)
 
     geometry = ""
-    if names == "库存基本数据":
-        geometry = "700x700+250+50"
+    if names == "总数统计":
+        geometry = "600x200+250+150"
 
-    elif names == "入库管理":
+    elif names == "数据谷":
         geometry = "800x700+250+50"
 
     elif names == "出库管理":

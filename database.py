@@ -11,7 +11,7 @@ import datetime
 
 class DataBase(object):
     def __init__(self, name):
-        self.db = pymysql.connect(host="192.168.1.12", user="root", password="123", database="药品库存管理系统")
+        self.db = pymysql.connect(host="192.168.1.12", user="root", password="123", database="computer_inventory")
         self.cursor = self.db.cursor()
         self.name = name
         # 获得table的字段名，在add函数中需要用到
@@ -67,6 +67,40 @@ if __name__ == '__main__':
     results = test.Search()
     print(test.columns)
     test.Add((0, "待赋值", "待赋值", 0, "待赋值", 0, "待赋值", 0, "待赋值", "待赋值", "待赋值"))
+
+"""
+CREATE DATABASE computer_inventory;
+
+USE computer_inventory;
+
+CREATE TABLE PC (
+    serial_number VARCHAR(50) PRIMARY KEY,  -- sn码（主键）
+    is_rental BOOLEAN,                      -- 是否为租赁
+    warranty VARCHAR(100),                  -- 质保
+    notes TEXT,                             -- 备注信息
+    project VARCHAR(100),                   -- 项目
+    project_room VARCHAR(100),              -- 项目室（外键）
+    CONSTRAINT FK_Location FOREIGN KEY (project_room) REFERENCES Location(project_room)
+);
+
+CREATE TABLE Employee (
+    employee_id VARCHAR(50) PRIMARY KEY,    -- 员工编号（主键）
+    name VARCHAR(100) NOT NULL              -- 姓名
+);
+
+CREATE TABLE Location (
+    project_room VARCHAR(100) PRIMARY KEY,  -- 项目室（主键）
+    building VARCHAR(100) NOT NULL          -- 楼栋
+);
+
+CREATE TABLE Allocation (
+    serial_number VARCHAR(50),              -- sn码
+    employee_id VARCHAR(50),                -- 员工编号
+    PRIMARY KEY (serial_number, employee_id),
+    FOREIGN KEY (serial_number) REFERENCES PC(serial_number),
+    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id)
+);
+"""
 
 """
 create database 药品库存管理系统;

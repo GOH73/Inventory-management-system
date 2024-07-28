@@ -1,3 +1,4 @@
+import getpass
 from tkinter import *
 from tkinter import messagebox
 import list
@@ -12,31 +13,32 @@ class Application(Frame):
         self.createWidget()
 
     def createWidget(self):
-        self.label1 = Label(self, text="Appen重庆台式机库存管理系统")
-        self.label1.grid(row=0, column=1)
+        self.label1 = Label(self, text="Appen（重庆）台式机库存管理系统", font=("Arial", 16))
+        self.label1.grid(row=0, column=0, columnspan=2, pady=10)
         # 创建用户名输入框
         self.label2 = Label(self, text="用户名")
-        self.label2.grid(row=1, column=0)
+        self.label2.grid(row=1, column=0, sticky=E, padx=10, pady=5)
 
         v1 = StringVar()
         self.entry1 = Entry(self, textvariable=v1)
-        self.entry1.grid(row=1, column=1)
+        self.entry1.grid(row=1, column=1, padx=10, pady=5)
 
         # 创建密码输入框
         self.label3 = Label(self, text="密码")
-        self.label3.grid(row=2, column=0)
+        self.label3.grid(row=2, column=0, sticky=E, padx=10, pady=5)
+
 
         v2 = StringVar()
-        self.entry2 = Entry(self, textvariable=v2)
-        self.entry2.grid(row=2, column=1)
+        self.entry2 = Entry(self, textvariable=v2, show='*')
+        self.entry2.grid(row=2, column=1, padx=10, pady=5)
 
         #  创建登录按钮
         self.btn1 = Button(self, text="登录", command=self.login)
-        self.btn1.grid(row=5, column=1)
+        self.btn1.grid(row=3, column=0, columnspan=2, pady=10)
 
         # 创建一个退出按钮
         self.btn_Quit = Button(self, text="退出", command=root.destroy)
-        self.btn_Quit.grid(row=5, column=2)
+        self.btn_Quit.grid(row=4, column=0, columnspan=2, pady=5)
 
     def login(self):
         username = self.entry1.get()
@@ -56,22 +58,20 @@ def create_frame1(p=None):
         list.root.destroy()
     else:
         root.destroy()
-    root1.geometry("1000x700+250+50")
-    root1.title("Appen重庆台式机库存管理系统")
+    root1.geometry("600x200+250+150")
+    root1.title("Appen（重庆）台式机库存管理系统")
     btnText = ("总数统计", "数据谷", "两江", "盘点管理")
-    funclist = (frame1_button1, frame1_button2, frame1_button3, frame1_button4)
-    i = 0
-    for text in btnText:
-        Button(root1, text=text, command=funclist[i]).pack(side="left", padx="10", anchor="n")
-        i = i + 1
-    Button(root1, text="退回登录界面", command=return_to_main_frame).pack(side="left", padx="10", anchor="n")
+    func_list = (frame1_button1, frame1_button2, frame1_button3, frame1_button4)
+    for i, text in enumerate(btnText):
+        Button(root1, text=text, command=func_list[i]).grid(row=0, column=i, padx=10, pady=20)
+    Button(root1, text="退回登录界面", command=return_to_main_frame).grid(row=0, column=len(btnText), padx=10, pady=20)
     root1.mainloop()
 
 
 def frame1_button1():
     root1.destroy()
-    columns = ("id", "仓库大小", "货架数量", "货架规格", "推车数量", "推车规格", "库工人数")
-    name = "库存基本数据"
+    columns = ("楼层", "地点", "项目", "PC总数", "PC在用数", "PC空闲数", "PC空置率")
+    name = "总数统计"
     list.main(columns, name)
 
 
@@ -107,7 +107,7 @@ def main_frame():
     root = Tk()
     # 通过geometry方法确定窗口在屏幕中的位置以及窗口的大小
     root.geometry("500x200+500+100")
-    root.title("药品库存管理信息系统")
+    root.title("Appen（重庆）台式机库存管理系统")
     app = Application(master=root)
     # 进入事件主循环 等待响应
     root.mainloop()
