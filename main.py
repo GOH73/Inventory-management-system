@@ -80,7 +80,7 @@ def frame1_button1():
 def frame1_button2():
     root1.destroy()
     columns = ("id", "产品代码", "名称", "入库数量", "单位", "日期", "操作者", "存货货位")
-    name = "入库管理"
+    name = "数据谷"
     list.main(columns, name)
 
 

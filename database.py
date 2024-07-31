@@ -15,7 +15,7 @@ class DataBase(object):
         self.cursor = self.db.cursor()
         self.name = name
         # 获得table的字段名，在add函数中需要用到
-        sql = "select COLUMN_NAME from information_schema.COLUMNS where table_name = '{0}'".format(self.name)
+        sql = f"select COLUMN_NAME from information_schema.COLUMNS where table_name = '{self.name}'"
         self.cursor.execute(sql)
         self.columns = self.cursor.fetchall()
         # 转换为标准格式
@@ -26,7 +26,7 @@ class DataBase(object):
 
     # 根据传入的数据，新建一条条目
     def Add(self, entry):
-        sql = "INSERT INTO {0} ({1}) VALUES {2}".format(self.name, ",".join(self.columns), entry)
+        sql = f"INSERT INTO {self.name} ({','.join(self.columns)}) VALUES {entry}"
         self.cursor.execute(sql)
         self.db.commit()
 
@@ -67,89 +67,3 @@ if __name__ == '__main__':
     results = test.Search()
     print(test.columns)
     test.Add((0, "待赋值", "待赋值", 0, "待赋值", 0, "待赋值", 0, "待赋值", "待赋值", "待赋值"))
-
-"""
-CREATE DATABASE computer_inventory;
-
-USE computer_inventory;
-
-CREATE TABLE Allocation (
-    serial_number VARCHAR(50),              -- sn码
-    employee_id VARCHAR(50),                -- 员工编号
-    PRIMARY KEY (serial_number, employee_id),
-    FOREIGN KEY (serial_number) REFERENCES PC(serial_number),
-    FOREIGN KEY (employee_id) REFERENCES Employee(employee_id)
-);
-
-CREATE TABLE PC (
-    serial_number VARCHAR(50) PRIMARY KEY,  -- sn码（主键）
-    is_rental BOOLEAN,                      -- 是否为租赁
-    warranty DATE,                          -- 质保
-    notes TEXT,                             -- 备注信息
-    project VARCHAR(100),                   -- 项目
-    project_room VARCHAR(100),              -- 项目室（外键）
-    CONSTRAINT FK_Location FOREIGN KEY (project_room) REFERENCES Location(project_room)
-);
-
-CREATE TABLE Employee (
-    employee_id VARCHAR(50) PRIMARY KEY,    -- 员工编号（主键）
-    name VARCHAR(100) NOT NULL              -- 姓名
-);
-
-CREATE TABLE Location (
-    project_room VARCHAR(100) PRIMARY KEY,  -- 项目室（主键）
-    building VARCHAR(100) NOT NULL          -- 楼栋
-);
-
-
-"""
-
-"""
-create database 药品库存管理系统;
-
-create table 库存基本数据(
-id int primary key not null,
-仓库大小 varchar(40) not null,
-货架数量 int not null,
-货架规格 varchar(20) not null,
-推车数量 int not null,
-推车规格 varchar(20) not null,
-库工人数 int not null
-);
-
-create table 入库管理(
-id int primary key not null,
-产品代码 varchar(40) not null,
-名称 varchar(40) not null,
-入库数量 int not null,
-单位 varchar(20) not null,
-日期 varchar(20) not null,
-操作者 varchar(20) not null,
-存货货位 int not null
-);
-
-create table 出库管理(
-id int primary key not null,
-产品代码 varchar(40) not null,
-名称 varchar(40) not null,
-出库数量 int not null,
-单位货 varchar(20) not null,
-日期 varchar(20) not null,
-操作者 varchar(20) not null,
-出存单位 int not null
-);
-
-create table 盘点管理(
-id int primary key not null,
-产品代码 varchar(40) not null,
-名称 varchar(40) not null,
-出库数量 int not null,
-出库单位 varchar(20) not null,
-入库数量 int not null,
-入库单位 varchar(20) not null,
-结余 int not null,
-空余货位 varchar(20),
-日期 varchar(20) not null,
-操作者 varchar(20) not null
-);
-"""

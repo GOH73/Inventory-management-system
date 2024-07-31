@@ -17,7 +17,6 @@ titles = {
 }
 
 
-
 def main(columns, names):
     global root, treeview, newb, content, db, return_to_last, deleteb, searchb
     db = database.DataBase(titles[names])  # 初始化数据库，连接数据库并得到对应table的数据
@@ -48,13 +47,15 @@ def main(columns, names):
 
     treeview.pack(side=LEFT, fill=BOTH)
     treeview.bind('<Double-1>', set_cell_value)
-    # 新建按钮初始化
-    newb = ttk.Button(root, text='新建条目', width=15, command=lambda: newrow(names))
-    newb.place(x=30, y=(len(content) - 1) * 20 + 45)
 
-    # 删除按钮初始化
-    deleteb = ttk.Button(root, text="删除", width=15, command=delete)
-    deleteb.place(x=160, y=(len(content) - 1) * 20 + 45)
+    if names != '总数统计':
+        # 新建按钮初始化
+        newb = ttk.Button(root, text='新建条目', width=15, command=lambda: newrow(names))
+        newb.place(x=30, y=(len(content) - 1) * 20 + 45)
+
+        # 删除按钮初始化
+        deleteb = ttk.Button(root, text="删除", width=15, command=delete)
+        deleteb.place(x=160, y=(len(content) - 1) * 20 + 45)
     # 查询按钮初始化
     searchb = ttk.Button(root, text="查询", width=15, command=search)
     searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
@@ -169,10 +170,11 @@ def newrow(names):
         searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
         treeview.update()
 
-    if names == "库存基本数据":
-        temp = (0, 0, 0, 0, 0, 0, 0)
-        updata_list(temp)
-    elif names == "入库管理":
+    if names == "总数统计":
+        # temp = ('0', '0', '0', 1, 1, 0, 0)
+        # updata_list(temp)
+        pass  # 总数统计由计算得出，不可自行修改
+    elif names == "数据谷":
         temp = (0, 0, 0, 0, 0, 0, 0, 0)
         updata_list(temp)
     elif names == "出库管理":
