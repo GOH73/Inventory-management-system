@@ -57,7 +57,7 @@ def main(columns, names):
         deleteb = ttk.Button(root, text="删除", width=15, command=delete)
         deleteb.place(x=160, y=(len(content) - 1) * 20 + 45)
     # 查询按钮初始化
-    searchb = ttk.Button(root, text="查询", width=15, command=search)
+    searchb = ttk.Button(root, text="查询", width=15, command=search_PCS)
     searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
 
     # 返回按钮初始化
@@ -93,6 +93,22 @@ def search():
         treeview.insert('', i, iid="I00{0}".format(i + 1), values=content[i])
     newb.place(x=30, y=(len(content) - 1) * 20 + 45)
     return_to_last.place(x=460, y=(len(content) - 1) * 20 + 45)
+    deleteb.place(x=160, y=(len(content) - 1) * 20 + 45)
+    searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
+
+    treeview.update()
+
+
+def search_PCS():
+    condition = simpledialog.askstring('查找', '请输入要查找的信息')
+    sql = f"SELECT * FROM PC_Statistics WHERE 项目='{condition}' OR 地点='{condition}' OR 楼层='{condition}'"
+    content = db.Search(sql)
+
+    for ii in treeview.get_children():
+        treeview.delete(ii)
+
+    for i in range(len(content)):
+        treeview.insert('', i, iid="I00{0}".format(i + 1), values=content[i])
     deleteb.place(x=160, y=(len(content) - 1) * 20 + 45)
     searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
 
@@ -163,7 +179,7 @@ def newrow(names):
             treeview.delete(ii)
 
         for i in range(len(content)):
-            treeview.insert('', i, iid="I00{0}".format(i + 1), values=content[i])
+            treeview.insert('', i, iid=f"I00{i + 1}", values=content[i])
         newb.place(x=30, y=(len(content) - 1) * 20 + 45)
         return_to_last.place(x=460, y=(len(content) - 1) * 20 + 45)
         deleteb.place(x=160, y=(len(content) - 1) * 20 + 45)
