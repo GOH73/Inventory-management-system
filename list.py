@@ -11,7 +11,7 @@ import database
 
 titles = {
     "总数统计": 'PC_Statistics',
-    '数据谷': 'Location',
+    '光电园': 'LJ_PC',
     '出库管理': 'Employee',
     '盘点管理': 'Allocation'
 }
@@ -30,7 +30,7 @@ def main(columns, names):
     if names == "总数统计":
         geometry = "600x200+250+150"
 
-    elif names == "数据谷":
+    elif names == "光电园":
         geometry = "800x700+250+50"
 
     elif names == "出库管理":
@@ -193,8 +193,8 @@ def newrow(names):
         # temp = ('0', '0', '0', 1, 1, 0, 0)
         # updata_list(temp)
         pass  # 总数统计由计算得出，不可自行修改
-    elif names == "数据谷":
-        temp = (0, 0, 0, 0, 0, 0, 0, 0)
+    elif names == "光电园":
+        temp = (0, 0, 0, 0, 0, 0, 0)
         updata_list(temp)
     elif names == "出库管理":
         temp = (0, 0, 0, 0, 0, 0, 0, 0)

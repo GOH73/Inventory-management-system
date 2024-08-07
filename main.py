@@ -62,7 +62,7 @@ def create_frame1(p=None):
         root.destroy()
     root1.geometry("600x200+250+150")
     root1.title("Appen（重庆）台式机库存管理系统")
-    btnText = ("总数统计", "数据谷", "两江", "盘点管理")
+    btnText = ("总数统计", "光电园", "数据谷", "盘点管理")
     func_list = (frame1_button1, frame1_button2, frame1_button3, frame1_button4)
     for i, text in enumerate(btnText):
         Button(root1, text=text, command=func_list[i]).grid(row=0, column=i, padx=10, pady=20)
@@ -79,8 +79,8 @@ def frame1_button1():
 
 def frame1_button2():
     root1.destroy()
-    columns = ("id", "产品代码", "名称", "入库数量", "单位", "日期", "操作者", "存货货位")
-    name = "数据谷"
+    columns = ("SN码", "员工号", "员工姓名", "项目", "地点", "备注", "质保")
+    name = "光电园"
     list.main(columns, name)
 
 

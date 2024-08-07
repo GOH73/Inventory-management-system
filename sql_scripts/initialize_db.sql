@@ -55,4 +55,23 @@ GROUP BY
 select * from PC_Statistics;
 -- 创建总数统计视图
 
+-- 创建光电园台式机数据视图
+CREATE VIEW LJ_PC AS
+SELECT
+    P.serial_number AS SN码,
+    COALESCE(A.employee_id, '空闲') AS 员工号,
+    COALESCE(E.name, '空闲') AS 员工姓名,
+    P.project AS 项目,
+    P.project_room AS 地点,
+    P.notes AS 备注,
+    P.warranty AS 质保
+FROM
+    PC P
+    LEFT JOIN Allocation A ON P.serial_number = A.serial_number
+    LEFT JOIN Employee E ON A.employee_id = E.employee_id
+    JOIN Location L ON P.project_room = L.project_room
+WHERE
+    L.building LIKE '光电园%';
+
+-- 创建光电园台式机数据视图
 
