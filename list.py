@@ -101,6 +101,9 @@ def search():
 
 def search_PCS():
     condition = simpledialog.askstring('查找', '请输入要查找的信息')
+    if not condition:
+        return
+
     sql = f"SELECT * FROM PC_Statistics WHERE 项目='{condition}' OR 地点='{condition}' OR 楼层='{condition}'"
     content = db.Search(sql)
 
@@ -109,7 +112,7 @@ def search_PCS():
 
     for i in range(len(content)):
         treeview.insert('', i, iid="I00{0}".format(i + 1), values=content[i])
-    deleteb.place(x=160, y=(len(content) - 1) * 20 + 45)
+    # deleteb.place(x=160, y=(len(content) - 1) * 20 + 45) 总数统计中只有查询按钮，所以注释掉这一行
     searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
 
     treeview.update()
