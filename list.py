@@ -12,7 +12,7 @@ import database
 titles = {
     "总数统计": 'PC_Statistics',
     '光电园': 'LJ_PC',
-    '出库管理': 'Employee',
+    '数据谷': 'SJG_PC',
     '盘点管理': 'Allocation'
 }
 
@@ -190,8 +190,6 @@ def newrow(names):
         treeview.update()
 
     if names == "总数统计":
-        # temp = ('0', '0', '0', 1, 1, 0, 0)
-        # updata_list(temp)
         pass  # 总数统计由计算得出，不可自行修改
     elif names == "光电园":
         temp = (0, 0, 0, 0, 0, 0, 0)

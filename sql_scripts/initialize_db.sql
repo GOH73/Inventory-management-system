@@ -56,6 +56,8 @@ select * from PC_Statistics;
 -- 创建总数统计视图
 
 -- 创建光电园台式机数据视图
+DROP VIEW IF EXISTS LJ_PC;
+
 CREATE VIEW LJ_PC AS
 SELECT
     P.serial_number AS SN码,
@@ -63,6 +65,7 @@ SELECT
     COALESCE(E.name, '空闲') AS 员工姓名,
     P.project AS 项目,
     P.project_room AS 地点,
+    P.is_rental AS 租赁,
     P.notes AS 备注,
     P.warranty AS 质保
 FROM
