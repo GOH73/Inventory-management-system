@@ -111,7 +111,7 @@ def search_PCS():
         treeview.delete(ii)
 
     for i in range(len(content)):
-        treeview.insert('', i, iid="I00{0}".format(i + 1), values=content[i])
+        treeview.insert('', i, iid=f"I00{i + 1}", values=content[i])
     # deleteb.place(x=160, y=(len(content) - 1) * 20 + 45) 总数统计中只有查询按钮，所以注释掉这一行
     searchb.place(x=300, y=(len(content) - 1) * 20 + 45)
 
