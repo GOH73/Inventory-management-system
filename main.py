@@ -79,7 +79,7 @@ def frame1_button1():
 
 def frame1_button2():
     root1.destroy()
-    columns = ("SN码", "员工号", "员工姓名", "项目", "地点", "备注", "质保")
+    columns = ("SN码", "员工号", "员工姓名", "项目", "地点", "租赁", "备注", "质保")
     name = "光电园"
     list.main(columns, name)
 
